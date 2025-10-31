@@ -1,3 +1,4 @@
+
 import os
 import logging
 import pandas as pd
@@ -7,7 +8,7 @@ from nltk.corpus import stopwords
 import string
 import nltk
 nltk.download('stopwords')
-nltk.download('punkt_tab')
+nltk.download('punkt')
 
 # Ensure the "logs" directory exists
 log_dir = 'logs'
@@ -49,7 +50,7 @@ def transform_text(text):
     # Join the tokens back into a single string
     return " ".join(text)
 
-def preprocess_df(df, text_column='Text', target_column='Target'):
+def preprocess_df(df, text_column='text', target_column='target'):
     """
     Preprocesses the DataFrame by encoding the target column, removing duplicates, and transforming the text column.
     """
@@ -76,14 +77,14 @@ def preprocess_df(df, text_column='Text', target_column='Target'):
         logger.error('Error during text normalization: %s', e)
         raise
 
-def main(text_column='Text', target_column='Target'):
+def main(text_column='text', target_column='target'):
     """
     Main function to load raw data, preprocess it, and save the processed data.
     """
     try:
         # Fetch the data from data/raw
-        train_data = pd.read_csv('./data/raw/train_data.csv')
-        test_data = pd.read_csv('./data/raw/test_data.csv')
+        train_data = pd.read_csv('./data/raw/train.csv')
+        test_data = pd.read_csv('./data/raw/test.csv')
         logger.debug('Data loaded properly')
 
         # Transform the data
